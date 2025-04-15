@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
     public float damage = 1;
 
-    public float knockbackForce = 50; 
+    public float knockbackForce; 
+    public float stunTime;
     
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,8 @@ public class Enemy : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            playerHealth.TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerMovement>().Knockback(transform, knockbackForce, stunTime);
         }
     }
 }

@@ -1,41 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed =5f;
-    private Rigidbody2D rb;
-    private Vector2 moveInput;
-    private Animator animator;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-    }
+    public float speed = 5;
+    public int facingDirection = 1;
+    public Rigidbody2D rb;
+    public Animator anim;
+    private Vector2 lastMoveDir = Vector2.down;
+    private bool isKnockedBack;
 
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = moveInput*moveSpeed;
+        if(isKnockedBack == false)
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+
+            Vector2 moveDirection = new Vector2(horizontal, vertical).normalized;
+            rb.velocity = moveDirection * speed;
+
+            if (moveDirection != Vector2.zero)
+            {
+                lastMoveDir = moveDirection;
+
+                if (horizontal > 0 && transform.localScale.x < 0 || horizontal < 0 && transform.localScale.x > 0)
+                {
+                    Flip();
+            }
+            }
+
+            anim.SetFloat("horizontal", lastMoveDir.x);
+            anim.SetFloat("vertical", lastMoveDir.y);
+            anim.SetFloat("speed", moveDirection.sqrMagnitude);
+        }
     }
 
-    public void Move(InputAction.CallbackContext context)
+    void Flip(){
+        facingDirection *= -1;
+        transform.localScale = new Vector3 (transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+    }
+
+    public void Knockback (Transform enemy, float force, float stunTime){
+        isKnockedBack = true;
+        Vector2 direction = (transform.position - enemy.position).normalized;
+        rb.velocity = direction * force;
+        StartCoroutine(KnockbackCounter(stunTime));
+    }
+
+    IEnumerator KnockbackCounter(float stunTime)
     {
-        animator.SetBool("isWalking",true);
-        
-        if (context.canceled)
-        {
-            animator.SetBool("isWalking",false);
-            animator.SetFloat("InputX", moveInput.x);
-            animator.SetFloat("InputY", moveInput.y);
-        }
-        
-        moveInput = context.ReadValue<Vector2>();
-        animator.SetFloat("InputX", moveInput.x);
-        animator.SetFloat("InputY", moveInput.y);
+        yield return new WaitForSeconds(stunTime);
+        rb.velocity = Vector2.zero;
+        isKnockedBack = false;
     }
 }
