@@ -7,7 +7,7 @@ public class AIChase : MonoBehaviour
 {
     public GameObject player;
     public float speed;
-
+    private bool isChasing;
     private Vector2 moveInput;
     private Animator animator;
 
@@ -21,10 +21,15 @@ public class AIChase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
-        Vector2 direction = player.transform.position - transform.position;
+        if ((isChasing == true))
+        {
 
-        transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+
+            distance = Vector2.Distance(transform.position, player.transform.position);
+            Vector2 direction = (player.transform.position - transform.position).normalized;
+
+            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+        }
     }
 
    public void Move(InputAction.CallbackContext context)
@@ -42,4 +47,19 @@ public class AIChase : MonoBehaviour
         animator.SetFloat("InputX", moveInput.x);
         animator.SetFloat("InputY", moveInput.y);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            
+            isChasing = true;
+        }
+    }
+
+  /*  private void OnTriggerExit2D(Collider2D collision)
+    {
+        isChasing = false;
+    }
+  */
 }
