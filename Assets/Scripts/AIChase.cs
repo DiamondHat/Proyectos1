@@ -21,6 +21,7 @@ public class AIChase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if ((isChasing == true))
         {
 
@@ -56,6 +57,8 @@ public class AIChase : MonoBehaviour
             isChasing = true;
         }
     }
+
+   
 
   /*  private void OnTriggerExit2D(Collider2D collision)
     {
