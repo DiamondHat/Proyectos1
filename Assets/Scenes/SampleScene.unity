@@ -7737,7 +7737,8 @@ GameObject:
   - component: {fileID: 739127120}
   - component: {fileID: 739127121}
   - component: {fileID: 739127122}
-  m_Layer: 0
+  - component: {fileID: 739127123}
+  m_Layer: 6
   m_Name: Silme
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -7923,6 +7924,20 @@ MonoBehaviour:
   damage: 10
   knockbackForce: 10
   stunTime: 0.15
+--- !u!114 &739127123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739127114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 091876d91cc65e24aa81a2f178dfdaf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15
+  maxHealth: 15
 --- !u!1 &823794328
 GameObject:
   m_ObjectHideFlags: 0
@@ -8041,7 +8056,8 @@ GameObject:
   - component: {fileID: 1148080058}
   - component: {fileID: 1148080057}
   - component: {fileID: 1148080056}
-  m_Layer: 0
+  - component: {fileID: 1148080064}
+  m_Layer: 6
   m_Name: Silme (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -8256,12 +8272,26 @@ Transform:
   m_GameObject: {fileID: 1148080055}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.61, y: 13.62, z: 0}
+  m_LocalPosition: {x: -43.7, y: 5.2, z: 0}
   m_LocalScale: {x: 2.0481393, y: 2.0481393, z: 1.0240697}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1148080064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148080055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 091876d91cc65e24aa81a2f178dfdaf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15
+  maxHealth: 15
 --- !u!1 &1451795254
 GameObject:
   m_ObjectHideFlags: 0
@@ -8277,6 +8307,7 @@ GameObject:
   - component: {fileID: 1451795262}
   - component: {fileID: 1451795260}
   - component: {fileID: 1451795261}
+  - component: {fileID: 1451795263}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -8391,7 +8422,8 @@ Transform:
   m_LocalPosition: {x: 5.7186, y: -0.083365, z: 0}
   m_LocalScale: {x: 1.1300136, y: 1.1300136, z: 1.1300136}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1963561270}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1451795260
@@ -8465,6 +8497,20 @@ MonoBehaviour:
   health: 0
   maxHealth: 100
   slider: {fileID: 2038706529}
+--- !u!114 &1451795263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451795254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea10330b84120745a795eb302f80b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 1963561270}
+  spherePrefab: {fileID: 6860526743492172857, guid: 8f12e745517aa784fa123d7a9c12066f, type: 3}
 --- !u!1 &1673608077
 GameObject:
   m_ObjectHideFlags: 0
@@ -42356,6 +42402,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1963561269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1963561270}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1963561270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963561269}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.471, y: -0.234, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1451795259}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2015309536
 GameObject:
   m_ObjectHideFlags: 0
