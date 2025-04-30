@@ -24,11 +24,8 @@ public class AIChase : MonoBehaviour
         
         if ((isChasing == true))
         {
-
-
             distance = Vector2.Distance(transform.position, player.transform.position);
             Vector2 direction = (player.transform.position - transform.position).normalized;
-
             transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
         }
     }
@@ -53,7 +50,6 @@ public class AIChase : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            
             isChasing = true;
         }
     }
