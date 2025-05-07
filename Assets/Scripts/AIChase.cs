@@ -10,12 +10,13 @@ public class AIChase : MonoBehaviour
     private bool isChasing;
     private Vector2 moveInput;
     private Animator animator;
+    private Rigidbody2D rb
+        ;
 
-    private float distance;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -24,9 +25,9 @@ public class AIChase : MonoBehaviour
         
         if ((isChasing == true))
         {
-            distance = Vector2.Distance(transform.position, player.transform.position);
-            Vector2 direction = (player.transform.position - transform.position).normalized;
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+            Vector3 Displacement = ((player.transform.position - transform.position).normalized * speed);
+            Vector2 Displacement2D = new Vector2(Displacement.x,Displacement.y);
+            rb.velocity = Displacement2D;
         }
     }
 
@@ -54,11 +55,13 @@ public class AIChase : MonoBehaviour
         }
     }
 
-   
+    
 
-  /*  private void OnTriggerExit2D(Collider2D collision)
-    {
-        isChasing = false;
-    }
-  */
+
+
+    /*  private void OnTriggerExit2D(Collider2D collision)
+      {
+          isChasing = false;
+      }
+    */
 }
