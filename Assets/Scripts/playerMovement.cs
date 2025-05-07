@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,6 +11,11 @@ public class PlayerMovement : MonoBehaviour
     public Animator anim;
     private Vector2 lastMoveDir = Vector2.down;
     private bool isKnockedBack;
+    public LayerMask stairs;
+    public GameObject popUp;
+    //private float timer = 10;
+    //private bool countDown=false;
+
 
     // Update is called once per frame
     void Update()
@@ -36,6 +42,12 @@ public class PlayerMovement : MonoBehaviour
             anim.SetFloat("vertical", lastMoveDir.y);
             anim.SetFloat("speed", moveDirection.sqrMagnitude);
         }
+       /* if(countDown == true)
+        {
+            timer -= Time.deltaTime;
+        }
+       */
+        
     }
 
     void Flip(){
@@ -56,4 +68,30 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector2.zero;
         isKnockedBack = false;
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        //collision.gameObject.tag == "Stairs" / (stairs.value & (1 << collision.gameObject.layer)) > 0
+        if (collision.gameObject.tag == "Stairs")
+        {
+            Instantiate(popUp, transform.position, Quaternion.identity);
+
+        }
+        else if (collision.CompareTag("Velocity"))
+        {
+            
+            Destroy(collision.gameObject);
+            speed = 9;
+           /* countDown = true;
+            if (timer <= 0)
+            {
+                speed = 5;
+            }
+           */
+        }
+    }
+
+
+    
+
 }
