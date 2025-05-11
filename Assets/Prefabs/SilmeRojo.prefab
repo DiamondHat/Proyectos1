@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 809848081763390406}
   - component: {fileID: 1410690304770292650}
   - component: {fileID: 5003691210373222958}
+  - component: {fileID: 4902926427799761635}
   m_Layer: 6
   m_Name: SilmeRojo
   m_TagString: Enemy
@@ -266,8 +267,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 6848820913268268766, guid: 076ae3599a7edd34fa1de95b9fae1b91, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 2087592303886424551, guid: 2959059d50a3bbf46b69bb62c2d6a52a, type: 3}
   bulletLife: 2
   speed: 7
   spawnerType: 0
   firingRate: 1.5
+--- !u!114 &4902926427799761635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8769594232214658901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a275dfd7451f0b408836968346361c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
+  player: {fileID: 0}
+  bulletLife: 1
+  speed: 1
+  spawnerType: 0
+  firingRate: 1
